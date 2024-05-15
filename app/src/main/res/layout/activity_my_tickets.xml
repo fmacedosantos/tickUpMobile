@@ -9,12 +9,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#1E1C1C"
+            android:background="#000000"
             android:paddingLeft="10dp"
             android:paddingTop="5dp"
             android:text="Meus Ingressos"
@@ -23,6 +24,21 @@
 
         </TextView>
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:text="Testando"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnTestar"
+            android:layout_width="133dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Atualizar" />
 
 
     </LinearLayout>
