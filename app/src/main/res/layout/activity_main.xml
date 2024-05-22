@@ -9,53 +9,57 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
         android:text="TickUP"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/textoEmail"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.371" />
+        app:layout_constraintVertical_bias="0.233" />
 
-    <EditText
-        android:id="@+id/textoEmail"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:width="300dp"
-        android:ems="10"
-        android:hint="Insira seu email"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/textoSenha"
+        android:layout_marginBottom="176dp"
+        android:text="Entrar como"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnUsuario"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/textoSenha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="92dp"
-        android:width="300dp"
-        android:ems="10"
-        android:hint="Insira sua senha"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/botaoEntrar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.132"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/botaoEntrar"
+        android:id="@+id/btnUsuario"
+        android:layout_width="169dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="92dp"
+        android:text="Usuário"
+        app:layout_constraintBottom_toTopOf="@+id/txtCadastro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnAdministrador"
+        android:layout_width="169dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="28dp"
+        android:text="Administrador"
+        app:layout_constraintBottom_toTopOf="@+id/txtCadastro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="144dp"
-        android:width="200dp"
-        android:text="Entrar"
-        android:textSize="20sp"
+        android:layout_marginBottom="140dp"
+        android:text="Cadastrar-se"
+        android:textColor="#0A86BD"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

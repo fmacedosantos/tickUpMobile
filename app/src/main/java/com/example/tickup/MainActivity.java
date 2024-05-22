@@ -7,31 +7,44 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText textoEmail, textoSenha;
-    private Button botaoEntrar;
+    private Button btnUsuario, btnAdmin;
+    private TextView txtCadastro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textoEmail = findViewById(R.id.textoEmail);
-        textoSenha = findViewById(R.id.textoSenha);
-        botaoEntrar = findViewById(R.id.botaoEntrar);
+        btnUsuario = findViewById(R.id.btnUsuario);
+        btnAdmin = findViewById(R.id.btnAdministrador);
+        txtCadastro = findViewById(R.id.txtCadastro);
 
-        botaoEntrar.setOnClickListener(new View.OnClickListener() {
+        btnUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = textoEmail.toString();
-                String senha = textoSenha.toString();
-
-                // adiconar verificação banco de dados
-
-                Intent intent = new Intent(MainActivity.this, MyTickets.class);
+                Intent intent = new Intent(MainActivity.this, UserLogin.class);
                 startActivity(intent);
             }
         });
+
+        btnAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AdminLogin.class);
+                startActivity(intent);
+            }
+        });
+
+        txtCadastro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RegisterUser.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
