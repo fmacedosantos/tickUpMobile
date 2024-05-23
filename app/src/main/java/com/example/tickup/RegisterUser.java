@@ -24,7 +24,7 @@ import okhttp3.Response;
 public class RegisterUser extends AppCompatActivity {
     private TextView inputNome, inputTelefone, inputIdade, inputCpf, inputEmail, inputSenha;
     private Button btnCadastrar;
-    private String ipAddress;
+    private String ipAddress, port;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +40,9 @@ public class RegisterUser extends AppCompatActivity {
 
         // Obtendo o endereço IP usando a classe utilitária
         ipAddress = NetworkUtils.getLocalIpAddress();
+        port = "5076";
+
+
 
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +62,7 @@ public class RegisterUser extends AppCompatActivity {
 
     private void consumeApi(String nome, String telefone, String idade, String cpf, String email, String senha) {
         OkHttpClient client = new OkHttpClient();
-        String url = "http://" + ipAddress + ":8080/api/Usuario/Cadastrar";
+        String url = "http://" + ipAddress + ":" + port + "/api/Usuario/Cadastrar";
 
         // Criar o JSON para enviar no corpo da requisição
         JSONObject jsonObject = new JSONObject();
