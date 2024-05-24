@@ -22,9 +22,10 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class RegisterUser extends AppCompatActivity {
+
     private TextView inputNome, inputTelefone, inputIdade, inputCpf, inputEmail, inputSenha;
     private Button btnCadastrar;
-    private String ipAddress, port;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,69 +39,71 @@ public class RegisterUser extends AppCompatActivity {
         inputSenha = findViewById(R.id.inputSenha);
         btnCadastrar = findViewById(R.id.btnCadastrar);
 
-        // Obtendo o endereço IP usando a classe utilitária
-        ipAddress = NetworkUtils.getLocalIpAddress();
-        port = "5076";
-
-
-
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String nome = inputNome.getText().toString();
                 String telefone = inputTelefone.getText().toString();
-                String idade = inputIdade.getText().toString();
+                int idade = Integer.parseInt(inputIdade.getText().toString());
                 String cpf = inputCpf.getText().toString();
                 String email = inputEmail.getText().toString();
                 String senha = inputSenha.getText().toString();
 
-                consumeApi(nome, telefone, idade, cpf, email, senha);
-            }
-        });
+                OkHttpClient client = new OkHttpClient();
 
-    }
+                // Prepare request data
+                String url = "http://192.168.1.6:5076/api/Usuario/Cadastrar";
 
-    private void consumeApi(String nome, String telefone, String idade, String cpf, String email, String senha) {
-        OkHttpClient client = new OkHttpClient();
-        String url = "http://" + ipAddress + ":" + port + "/api/Usuario/Cadastrar";
-
-        // Criar o JSON para enviar no corpo da requisição
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("nome", nome);
-            jsonObject.put("telefone", telefone);
-            jsonObject.put("idade", idade);
-            jsonObject.put("cpf", cpf);
-            jsonObject.put("email", email);
-            jsonObject.put("senha", senha);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        // Criar o RequestBody com o JSON
-        RequestBody body = RequestBody.create(jsonObject.toString(), MediaType.get("application/json; charset=utf-8"));
-
-        // Criar a requisição POST
-        Request request = new Request.Builder()
-                .url(url)
-                .post(body)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-                runOnUiThread(() -> Toast.makeText(RegisterUser.this, "Erro na API: " + e.getMessage(), Toast.LENGTH_LONG).show());
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    final String responseData = response.body().string();
-                    runOnUiThread(() -> Toast.makeText(RegisterUser.this, "Resposta da API: " + responseData, Toast.LENGTH_LONG).show());
-                } else {
-                    runOnUiThread(() -> Toast.makeText(RegisterUser.this, "Erro na API: " + response.message(), Toast.LENGTH_LONG).show());
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("email", email);
+                    jsonObject.put("cpf", cpf);
+                    jsonObject.put("nome", nome);
+                    jsonObject.put("telefone", telefone);
+                    jsonObject.put("senha", senha);
+                    jsonObject.put("idade", idade);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+
+                RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
+                Request request = new Request.Builder()
+                        .url(url)
+                        .post(body)
+                        .build();
+
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        e.printStackTrace();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(RegisterUser.this, "Erro ao registrar usuário", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (response.isSuccessful()) {
+                            String responseData = response.body().string();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(RegisterUser.this, "Usuário registrado com sucesso", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } else {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(RegisterUser.this, "Erro: " + response.message(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }
+                });
             }
         });
     }
