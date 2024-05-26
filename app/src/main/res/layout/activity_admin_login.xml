@@ -12,7 +12,7 @@
 
         android:layout_width="280dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/pred_input"
         android:ems="10"
         android:hint="Email de contato"
