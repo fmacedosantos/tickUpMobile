@@ -44,7 +44,7 @@ public class RegisterUser extends AppCompatActivity {
 
         client = new OkHttpClient();
         jsonObject = new JSONObject();
-        url = "http://192.168.1.6:5076/api/Usuario/Cadastrar";
+        url = "https://tick-up-1fb4969b94c5.herokuapp.com/api/Usuario/Cadastrar";
 
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
