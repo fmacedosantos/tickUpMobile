@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         btnAdmin = findViewById(R.id.btnAdministrador);
         txtCadastro = findViewById(R.id.txtCadastro);
 
+
+
         btnUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

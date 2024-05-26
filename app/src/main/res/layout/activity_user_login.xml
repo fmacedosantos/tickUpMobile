@@ -7,11 +7,28 @@
     android:background="@color/cinza"
     tools:context=".UserLogin">
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="136dp"
+        android:fontFamily="@font/jockey_one"
+        android:shadowColor="@color/preto"
+        android:text="Usuário"
+        android:textColor="@color/ciano"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/inputEmailUsuario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <EditText
         android:id="@+id/inputEmailUsuario"
         android:layout_width="280dp"
         android:layout_height="50dp"
-        android:layout_marginTop="248dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/pred_input"
         android:ems="10"
         android:hint="Email"
@@ -22,9 +39,7 @@
         app:layout_constraintBottom_toTopOf="@+id/inputSenhaUsuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.533" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/inputSenhaUsuario"
