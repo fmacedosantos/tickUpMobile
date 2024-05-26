@@ -25,6 +25,9 @@ public class RegisterUser extends AppCompatActivity {
 
     private TextView inputNome, inputTelefone, inputIdade, inputCpf, inputEmail, inputSenha;
     private Button btnCadastrar;
+    private OkHttpClient client;
+    private JSONObject jsonObject;
+    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,10 @@ public class RegisterUser extends AppCompatActivity {
         inputSenha = findViewById(R.id.inputSenha);
         btnCadastrar = findViewById(R.id.btnCadastrar);
 
+        client = new OkHttpClient();
+        jsonObject = new JSONObject();
+        url = "http://192.168.1.6:5076/api/Usuario/Cadastrar";
+
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,12 +56,6 @@ public class RegisterUser extends AppCompatActivity {
                 String email = inputEmail.getText().toString();
                 String senha = inputSenha.getText().toString();
 
-                OkHttpClient client = new OkHttpClient();
-
-                // Prepare request data
-                String url = "http://192.168.1.6:5076/api/Usuario/Cadastrar";
-
-                JSONObject jsonObject = new JSONObject();
                 try {
                     jsonObject.put("email", email);
                     jsonObject.put("cpf", cpf);
