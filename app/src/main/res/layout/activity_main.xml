@@ -4,48 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cinza"
+    app:circularflow_defaultRadius="30px"
     tools:context=".MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
+        android:fontFamily="@font/jockey_one"
         android:text="TickUP"
-        android:textSize="48sp"
+        android:textColor="@color/ciano"
+        android:textSize="60sp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.233" />
+        app:layout_constraintVertical_bias="0.086" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="176dp"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/jockey_one"
         android:text="Entrar como"
-        android:textSize="16sp"
+        android:textColor="#FFFAFB"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/btnUsuario"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintHorizontal_bias="0.129"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnUsuario"
         android:layout_width="169dp"
         android:layout_height="53dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="84dp"
+        android:background="@drawable/pred_botao_tipo1"
         android:text="Usuário"
+        android:textColor="@color/cinza"
         app:layout_constraintBottom_toTopOf="@+id/txtCadastro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAdministrador"
         android:layout_width="169dp"
         android:layout_height="53dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/pred_botao_tipo2"
         android:text="Administrador"
+        android:textColor="@color/branco"
         app:layout_constraintBottom_toTopOf="@+id/txtCadastro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -54,12 +65,24 @@
         android:id="@+id/txtCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="140dp"
+        android:layout_marginBottom="124dp"
         android:text="Cadastrar-se"
-        android:textColor="#0A86BD"
+        android:textColor="#8DFFFFFF"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="85dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="112dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.064"
+        app:srcCompat="@drawable/icone_tick_up" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

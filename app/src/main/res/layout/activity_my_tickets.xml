@@ -4,25 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/branco"
     tools:context=".MyTickets">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#1E1C1C"
+            android:background="@color/cinza"
             android:paddingLeft="10dp"
             android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:text="Meus Ingressos"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/ciano"
             android:textSize="24sp">
 
         </TextView>
 
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            />
 
 
     </LinearLayout>

@@ -4,6 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cinza"
     tools:context=".UserLogin">
 
+    <EditText
+        android:id="@+id/inputEmailUsuario"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="248dp"
+        android:background="@drawable/pred_input"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="text"
+        android:paddingLeft="15dp"
+        android:textColor="@color/branco"
+        android:textColorHint="@color/branco"
+        app:layout_constraintBottom_toTopOf="@+id/inputSenhaUsuario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.533" />
+
+    <EditText
+        android:id="@+id/inputSenhaUsuario"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="196dp"
+        android:background="@drawable/pred_input"
+        android:ems="10"
+        android:hint="Senha"
+        android:inputType="text"
+        android:paddingLeft="15dp"
+        android:textColor="@color/branco"
+        android:textColorHint="@color/branco"
+        app:layout_constraintBottom_toTopOf="@+id/btnEntrarUsuario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnEntrarUsuario"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="92dp"
+        android:background="@drawable/pred_botao_tipo1"
+        android:text="Entrar"
+        android:textColor="@color/cinza"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
