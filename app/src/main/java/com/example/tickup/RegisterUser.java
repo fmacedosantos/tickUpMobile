@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +24,7 @@ import okhttp3.Response;
 
 public class RegisterUser extends AppCompatActivity {
 
-    private TextView inputNome, inputTelefone, inputIdade, inputCpf, inputEmail, inputSenha;
+    private EditText inputNome, inputTelefone, inputIdade, inputCpf, inputEmail, inputSenha;
     private Button btnCadastrar;
     private OkHttpClient client;
     private JSONObject jsonObject;
