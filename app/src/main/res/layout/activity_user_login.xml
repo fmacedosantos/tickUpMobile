@@ -49,7 +49,7 @@
         android:background="@drawable/pred_input"
         android:ems="10"
         android:hint="Senha"
-        android:inputType="text"
+        android:inputType="text|textPassword"
         android:paddingLeft="15dp"
         android:textColor="@color/branco"
         android:textColorHint="@color/branco"
