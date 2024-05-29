@@ -2,6 +2,7 @@ package com.example.tickup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -201,6 +202,10 @@ public class RegisterUser extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     Toast.makeText(RegisterUser.this, "Usuário registrado com sucesso", Toast.LENGTH_SHORT).show();
+
+                                    Intent intent = new Intent(RegisterUser.this, MyTickets.class);
+                                    intent.putExtra("emailUsuario", email);
+                                    startActivity(intent);
                                 }
                             });
                         } else {
