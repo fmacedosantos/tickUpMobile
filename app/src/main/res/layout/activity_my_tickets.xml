@@ -31,5 +31,14 @@
             android:paddingLeft="20dp"
             android:paddingTop="15dp"
             android:id="@+id/teste"/>
+
+        <LinearLayout
+            android:id="@+id/qrCodeContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

@@ -2,12 +2,19 @@ package com.example.tickup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.widget.ListView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -21,6 +28,7 @@ import okhttp3.Response;
 
 public class MyTickets extends AppCompatActivity {
     private TextView txtViewIngressos;
+    private LinearLayout qrCodeContainer;
     private String email, url;
     private OkHttpClient client;
 
@@ -30,12 +38,13 @@ public class MyTickets extends AppCompatActivity {
         setContentView(R.layout.activity_my_tickets);
 
         txtViewIngressos = findViewById(R.id.teste);
+        qrCodeContainer = findViewById(R.id.qrCodeContainer);
         email = getIntent().getStringExtra("emailUsuario");
         url = "https://tick-up-1fb4969b94c5.herokuapp.com/api/Compra/Usuario/" + email;
-        fetchTickets(email);
+        obterIngressos(email);
     }
 
-    private void fetchTickets(String email) {
+    private void obterIngressos(String email) {
         client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(url)
@@ -62,22 +71,18 @@ public class MyTickets extends AppCompatActivity {
                     Type listType = new TypeToken<List<Ingresso>>() {}.getType();
                     List<Ingresso> ingressos = gson.fromJson(json, listType);
 
-                    StringBuilder message = new StringBuilder();
-                    if (ingressos != null && !ingressos.isEmpty()) {
-                        for (Ingresso ingresso : ingressos) {
-                            message.append("Código: ").append(ingresso.getIdIngresso())
-                                    .append(", Evento: ").append(ingresso.getNomeEvento())
-                                    .append("\n\n");
-                        }
-                    } else {
-                        message.append("O usuário cadastrado não possui ingressos.");
-                    }
-
-                    final String finalMessage = message.toString();
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            txtViewIngressos.setText(finalMessage);
+                            if (ingressos != null && !ingressos.isEmpty()) {
+                                qrCodeContainer.removeAllViews(); // Clear any existing views
+                                for (Ingresso ingresso : ingressos) {
+                                    adicionarIngressosView(ingresso);
+                                }
+                                txtViewIngressos.setText(""); // Clear loading message
+                            } else {
+                                txtViewIngressos.setText("O usuário cadastrado não possui ingressos.");
+                            }
                         }
                     });
                 } else {
@@ -90,5 +95,30 @@ public class MyTickets extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void adicionarIngressosView(Ingresso ingresso) {
+        TextView title = new TextView(this);
+        title.setText("Evento: " + ingresso.getNomeEvento());
+
+        ImageView qrCodeView = new ImageView(this);
+        Bitmap qrCodeBitmap = gerarQRCode(ingresso.getIdIngresso());
+        if (qrCodeBitmap != null) {
+            qrCodeView.setImageBitmap(qrCodeBitmap);
+        }
+
+        qrCodeContainer.addView(title);
+        qrCodeContainer.addView(qrCodeView);
+    }
+
+    private Bitmap gerarQRCode(String text) {
+        try {
+            BitMatrix bitMatrix = new MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, 400, 400);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            return barcodeEncoder.createBitmap(bitMatrix);
+        } catch (WriterException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
