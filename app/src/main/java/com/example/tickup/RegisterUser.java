@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -130,10 +131,38 @@ public class RegisterUser extends AppCompatActivity {
             public void onClick(View v) {
                 String nome = inputNome.getText().toString();
                 String telefone = inputTelefone.getText().toString();
-                int idade = Integer.parseInt(inputIdade.getText().toString());
+                String idadeStr = inputIdade.getText().toString();
                 String cpf = inputCpf.getText().toString();
                 String email = inputEmail.getText().toString();
                 String senha = inputSenha.getText().toString();
+
+                if (nome.isEmpty() || telefone.isEmpty() || idadeStr.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+                    Toast.makeText(RegisterUser.this, "Todos os campos devem ser preenchidos", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (!isEmailValid(email)) {
+                    Toast.makeText(RegisterUser.this, "Email inválido", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (!isCpfValid(cpf)) {
+                    Toast.makeText(RegisterUser.this, "CPF inválido", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (!isTelefoneValid(telefone)) {
+                    Toast.makeText(RegisterUser.this, "Telefone inválido", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                int idade;
+                try {
+                    idade = Integer.parseInt(idadeStr);
+                } catch (NumberFormatException e) {
+                    Toast.makeText(RegisterUser.this, "Idade inválida", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 try {
                     jsonObject.put("email", email);
@@ -186,5 +215,19 @@ public class RegisterUser extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private boolean isEmailValid(String email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    private boolean isCpfValid(String cpf) {
+        String unformattedCpf = cpf.replaceAll("[^\\d]", "");
+        return unformattedCpf.length() == 11;
+    }
+
+    private boolean isTelefoneValid(String telefone) {
+        String unformattedTelefone = telefone.replaceAll("[^\\d]", "");
+        return unformattedTelefone.length() == 11;
     }
 }
