@@ -3,10 +3,11 @@ package com.example.tickup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -42,6 +43,83 @@ public class RegisterUser extends AppCompatActivity {
         inputEmail = findViewById(R.id.inputEmail);
         inputSenha = findViewById(R.id.inputSenha);
         btnCadastrar = findViewById(R.id.btnCadastrar);
+
+        inputCpf.addTextChangedListener(new TextWatcher() {
+            private static final int MAX_LENGTH = 14;
+            private boolean isUpdating;
+            private String oldString = "";
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String str = s.toString().replaceAll("[^\\d]", "");
+                if (!isUpdating) {
+                    isUpdating = true;
+                    StringBuilder mask = new StringBuilder();
+                    int i = 0;
+                    for (char m : "###.###.###-##".toCharArray()) {
+                        if (m != '#' && str.length() > oldString.length()) {
+                            mask.append(m);
+                            continue;
+                        }
+                        try {
+                            mask.append(str.charAt(i));
+                        } catch (Exception e) {
+                            break;
+                        }
+                        i++;
+                    }
+                    oldString = mask.toString();
+                    inputCpf.setText(mask.toString());
+                    inputCpf.setSelection(mask.length());
+                    isUpdating = false;
+                }
+            }
+        });
+
+        inputTelefone.addTextChangedListener(new TextWatcher() {
+            private boolean isUpdating;
+            private String oldString = "";
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String str = s.toString().replaceAll("[^\\d]", "");
+                if (!isUpdating) {
+                    isUpdating = true;
+                    StringBuilder mask = new StringBuilder();
+                    int i = 0;
+                    for (char m : "(##) #####-####".toCharArray()) {
+                        if (m != '#' && str.length() > oldString.length()) {
+                            mask.append(m);
+                            continue;
+                        }
+                        try {
+                            mask.append(str.charAt(i));
+                        } catch (Exception e) {
+                            break;
+                        }
+                        i++;
+                    }
+                    oldString = mask.toString();
+                    inputTelefone.setText(mask.toString());
+                    inputTelefone.setSelection(mask.length());
+                    isUpdating = false;
+                }
+            }
+        });
 
         client = new OkHttpClient();
         jsonObject = new JSONObject();
