@@ -1,7 +1,12 @@
 package com.example.tickup;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Ingresso {
+    @SerializedName("idIngresso")
     private String idIngresso;
+
+    @SerializedName("nomeEvento")
     private String nomeEvento;
 
     public String getIdIngresso() {
