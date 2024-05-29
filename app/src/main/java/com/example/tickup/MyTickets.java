@@ -2,8 +2,12 @@ package com.example.tickup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
+
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -101,6 +105,11 @@ public class MyTickets extends AppCompatActivity {
         TextView title = new TextView(this);
         title.setText("Evento: " + ingresso.getNomeEvento());
 
+        title.setTextColor(getResources().getColor(R.color.cinza));
+        title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.jockey_one);
+        title.setTypeface(typeface);
+
         ImageView qrCodeView = new ImageView(this);
         Bitmap qrCodeBitmap = gerarQRCode(ingresso.getIdIngresso());
         if (qrCodeBitmap != null) {
@@ -113,7 +122,7 @@ public class MyTickets extends AppCompatActivity {
 
     private Bitmap gerarQRCode(String text) {
         try {
-            BitMatrix bitMatrix = new MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, 400, 400);
+            BitMatrix bitMatrix = new MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, 600, 600);
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             return barcodeEncoder.createBitmap(bitMatrix);
         } catch (WriterException e) {
