@@ -23,7 +23,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class AdminLogin extends AppCompatActivity {
-    private EditText inputEmailContato, inputIdEvento;
+    private EditText inputEmailContato, inputCpfCnpj;
     private Button btnEntrar;
     private OkHttpClient client;
     private JSONObject jsonObject;
@@ -35,7 +35,7 @@ public class AdminLogin extends AppCompatActivity {
         setContentView(R.layout.activity_admin_login);
 
         inputEmailContato = findViewById(R.id.inputEmailContato);
-        inputIdEvento = findViewById(R.id.inputIdEvento);
+        inputCpfCnpj = findViewById(R.id.inputCpfCnpj);
         btnEntrar = findViewById(R.id.btnEntrar);
 
         client = new OkHttpClient();
@@ -46,11 +46,11 @@ public class AdminLogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String emailContato = inputEmailContato.getText().toString();
-                String idEvento = inputIdEvento.getText().toString();
+                String cpfCnpj = inputCpfCnpj.getText().toString();
 
                 try {
                     jsonObject.put("emailContato", emailContato);
-                    jsonObject.put("idEvento", idEvento);
+                    jsonObject.put("cpf", cpfCnpj);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

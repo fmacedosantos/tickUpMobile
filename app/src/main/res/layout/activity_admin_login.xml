@@ -20,7 +20,7 @@
         android:paddingLeft="15dp"
         android:textColor="@color/branco"
         android:textColorHint="@color/branco"
-        app:layout_constraintBottom_toTopOf="@+id/inputIdEvento"
+        app:layout_constraintBottom_toTopOf="@+id/inputCpfCnpj"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
@@ -40,13 +40,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/inputIdEvento"
+        android:id="@+id/inputCpfCnpj"
         android:layout_width="280dp"
         android:layout_height="50dp"
         android:layout_marginBottom="196dp"
         android:background="@drawable/pred_input"
         android:ems="10"
-        android:hint="Código do evento"
+        android:hint="CPF / CNPJ"
         android:inputType="text"
         android:paddingLeft="15dp"
         android:textColor="@color/branco"
