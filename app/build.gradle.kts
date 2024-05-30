@@ -32,11 +32,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
-    implementation ("com.google.android.gms:play-services-mlkit-barcode-scanning:16.1.3")
-    implementation ("androidx.camera:camera-camera2:1.1.0")
-
-    implementation ("com.google.zxing:core:3.4.1")
-    implementation ("com.journeyapps:zxing-android-embedded:4.2.0")
+    implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
