@@ -50,7 +50,7 @@ public class AdminLogin extends AppCompatActivity {
 
                 try {
                     jsonObject.put("emailContato", emailContato);
-                    jsonObject.put("cpf", cpfCnpj);
+                    jsonObject.put("cpfCnpj", cpfCnpj);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
