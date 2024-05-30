@@ -1,0 +1,12 @@
+<!-- res/values/styles.xml -->
+<resources>
+    <style name="DialogSuccess" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">#A5D6A7</item> <!-- Background verde para sucesso -->
+        <item name="android:textColorPrimary">#000000</item> <!-- Cor do texto preta -->
+    </style>
+
+    <style name="DialogFailure" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">#EF9A9A</item> <!-- Background vermelho para falha -->
+        <item name="android:textColorPrimary">#000000</item> <!-- Cor do texto preta -->
+    </style>
+</resources>

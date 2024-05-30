@@ -53,14 +53,16 @@ public class VerifyTicket extends AppCompatActivity {
 
     ActivityResultLauncher<ScanOptions> barLaucher = registerForActivityResult(new ScanContract(), result -> {
         if (result.getContents() != null) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(VerifyTicket.this);
-            builder.setTitle("Resultado");
             String idIngresso = result.getContents();
 
             verificarIngresso(idIngresso, new VerificationCallback() {
                 @Override
                 public void onResult(boolean isValid) {
                     String message = isValid ? "Ingresso válido" : "Ingresso inválido";
+                    int style = isValid ? R.style.DialogSuccess : R.style.DialogFailure;
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(VerifyTicket.this, style);
+                    builder.setTitle("Resultado");
                     builder.setMessage(message);
                     builder.setPositiveButton("OK", (dialog, i) -> dialog.dismiss()).show();
                 }
