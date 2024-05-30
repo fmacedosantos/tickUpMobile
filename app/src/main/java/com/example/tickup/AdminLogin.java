@@ -110,15 +110,15 @@ public class AdminLogin extends AppCompatActivity {
                                         startActivity(intent);
                                     }
                                 });
-                            } else {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(AdminLogin.this, "Credenciais inválidas", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
                             }
-                        } else {
+                        } else if (response.code() == 401) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(AdminLogin.this, "Dados inválidos", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }else {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {

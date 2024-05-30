@@ -94,14 +94,14 @@ public class UserLogin extends AppCompatActivity {
                                         startActivity(intent);
                                     }
                                 });
-                            } else {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(UserLogin.this, "Credenciais inválidas", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
                             }
+                        } else if (response.code() == 401) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(UserLogin.this, "Dados inválidos", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         } else {
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -112,6 +112,8 @@ public class UserLogin extends AppCompatActivity {
                         }
                     }
                 });
+
+
             }
         });
 
