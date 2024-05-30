@@ -1,7 +1,6 @@
 package com.example.tickup;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 public class VerifyTicket extends AppCompatActivity {

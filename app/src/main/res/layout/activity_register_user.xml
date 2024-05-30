@@ -15,7 +15,7 @@
         android:background="@drawable/pred_input"
         android:ems="10"
         android:hint="Nome"
-        android:inputType="text"
+        android:inputType="text|textNoSuggestions"
         android:paddingLeft="15dp"
         android:textColor="@color/branco"
         android:textColorHint="@color/branco"

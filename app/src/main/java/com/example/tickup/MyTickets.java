@@ -79,11 +79,11 @@ public class MyTickets extends AppCompatActivity {
                         @Override
                         public void run() {
                             if (ingressos != null && !ingressos.isEmpty()) {
-                                qrCodeContainer.removeAllViews(); // Clear any existing views
+                                qrCodeContainer.removeAllViews();
                                 for (Ingresso ingresso : ingressos) {
                                     adicionarIngressosView(ingresso);
                                 }
-                                txtViewIngressos.setText(""); // Clear loading message
+                                txtViewIngressos.setText("");
                             } else {
                                 txtViewIngressos.setText("O usuário cadastrado não possui ingressos.");
                             }
