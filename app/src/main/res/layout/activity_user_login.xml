@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -36,27 +35,43 @@
         android:paddingLeft="15dp"
         android:textColor="@color/branco"
         android:textColorHint="@color/branco"
-        app:layout_constraintBottom_toTopOf="@+id/inputSenhaUsuario"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayoutSenha"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/inputSenhaUsuario"
+    <FrameLayout
+        android:id="@+id/frameLayoutSenha"
         android:layout_width="280dp"
         android:layout_height="50dp"
         android:layout_marginBottom="196dp"
-        android:background="@drawable/pred_input"
-        android:ems="10"
-        android:hint="Senha"
-        android:inputType="text|textPassword"
-        android:paddingLeft="15dp"
-        android:textColor="@color/branco"
-        android:textColorHint="@color/branco"
         app:layout_constraintBottom_toTopOf="@+id/btnEntrarUsuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <EditText
+            android:id="@+id/inputSenhaUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/pred_input"
+            android:ems="10"
+            android:hint="Senha"
+            android:inputType="text|textPassword"
+            android:paddingLeft="15dp"
+            android:paddingRight="60dp"
+            android:textColor="@color/branco"
+            android:textColorHint="@color/branco" />
+
+        <ImageButton
+            android:id="@+id/showHidePasswordButton"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="8dp"
+            android:background="@null"
+            android:src="@drawable/ic_visibility_off"/>
+    </FrameLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnEntrarUsuario"

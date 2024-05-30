@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -25,9 +27,11 @@ import okhttp3.Response;
 public class UserLogin extends AppCompatActivity {
     private EditText inputEmail, inputSenha;
     private Button btnEntrar;
+    private ImageButton showHidePasswordButton;
     private OkHttpClient client;
     private JSONObject jsonObject;
     private String url;
+    private boolean isPasswordVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class UserLogin extends AppCompatActivity {
         inputEmail = findViewById(R.id.inputEmailUsuario);
         inputSenha = findViewById(R.id.inputSenhaUsuario);
         btnEntrar = findViewById(R.id.btnEntrarUsuario);
+        showHidePasswordButton = findViewById(R.id.showHidePasswordButton);
 
         client = new OkHttpClient();
         jsonObject = new JSONObject();
@@ -107,6 +112,24 @@ public class UserLogin extends AppCompatActivity {
                         }
                     }
                 });
+            }
+        });
+
+        showHidePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isPasswordVisible) {
+                    // Hide password
+                    inputSenha.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    showHidePasswordButton.setImageResource(R.drawable.ic_visibility_off);
+                } else {
+                    // Show password
+                    inputSenha.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    showHidePasswordButton.setImageResource(R.drawable.ic_visibility);
+                }
+                // Move cursor to end of input
+                inputSenha.setSelection(inputSenha.getText().length());
+                isPasswordVisible = !isPasswordVisible;
             }
         });
     }
