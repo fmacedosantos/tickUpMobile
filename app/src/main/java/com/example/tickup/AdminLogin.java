@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -28,6 +31,8 @@ public class AdminLogin extends AppCompatActivity {
     private OkHttpClient client;
     private JSONObject jsonObject;
     private String url;
+    private Switch switchCpfCnpj;
+    private TextWatcher cpfTextWatcher, cnpjTextWatcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +42,27 @@ public class AdminLogin extends AppCompatActivity {
         inputEmailContato = findViewById(R.id.inputEmailContato);
         inputCpfCnpj = findViewById(R.id.inputCpfCnpj);
         btnEntrar = findViewById(R.id.btnEntrar);
+        switchCpfCnpj = findViewById(R.id.swtCnpj);
 
         client = new OkHttpClient();
         jsonObject = new JSONObject();
         url = "https://tick-up-1fb4969b94c5.herokuapp.com/api/Evento/Login";
+
+        cpfTextWatcher = createTextWatcher("###.###.###-##");
+        cnpjTextWatcher = createTextWatcher("##.###.###/####-##");
+
+        switchCpfCnpj.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                inputCpfCnpj.setHint("CNPJ");
+                inputCpfCnpj.removeTextChangedListener(cpfTextWatcher);
+                inputCpfCnpj.addTextChangedListener(cnpjTextWatcher);
+            } else {
+                inputCpfCnpj.setHint("CPF");
+                inputCpfCnpj.removeTextChangedListener(cnpjTextWatcher);
+                inputCpfCnpj.addTextChangedListener(cpfTextWatcher);
+            }
+            inputCpfCnpj.setText("");
+        });
 
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,5 +130,48 @@ public class AdminLogin extends AppCompatActivity {
                 });
             }
         });
+
+        // Set the initial state of the switch
+        switchCpfCnpj.setChecked(false); // default to CPF
+        inputCpfCnpj.addTextChangedListener(cpfTextWatcher);
+    }
+
+    private TextWatcher createTextWatcher(final String maskPattern) {
+        return new TextWatcher() {
+            private boolean isUpdating;
+            private String oldString = "";
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String str = s.toString().replaceAll("[^\\d]", "");
+                if (!isUpdating) {
+                    isUpdating = true;
+                    StringBuilder mask = new StringBuilder();
+                    int i = 0;
+                    for (char m : maskPattern.toCharArray()) {
+                        if (m != '#' && str.length() > oldString.length()) {
+                            mask.append(m);
+                            continue;
+                        }
+                        try {
+                            mask.append(str.charAt(i));
+                        } catch (Exception e) {
+                            break;
+                        }
+                        i++;
+                    }
+                    oldString = mask.toString();
+                    inputCpfCnpj.setText(mask.toString());
+                    inputCpfCnpj.setSelection(mask.length());
+                    isUpdating = false;
+                }
+            }
+        };
     }
 }

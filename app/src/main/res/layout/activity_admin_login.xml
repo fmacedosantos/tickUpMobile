@@ -7,20 +7,55 @@
     android:background="@color/cinza"
     tools:context=".AdminLogin">
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="136dp"
+        android:fontFamily="@font/jockey_one"
+        android:shadowColor="@color/preto"
+        android:text="Administrador"
+        android:textColor="@color/ciano"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/inputEmailContato"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+
     <EditText
         android:id="@+id/inputEmailContato"
 
         android:layout_width="280dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/pred_input"
         android:ems="10"
         android:hint="Email de contato"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="15dp"
+        android:textColor="@color/branco"
+        android:textColorHint="@color/branco"
+        app:layout_constraintBottom_toTopOf="@+id/swtCnpj"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/inputCpfCnpj"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="168dp"
+        android:background="@drawable/pred_input"
+        android:ems="10"
+        android:hint="CPF"
         android:inputType="text"
         android:paddingLeft="15dp"
         android:textColor="@color/branco"
         android:textColorHint="@color/branco"
-        app:layout_constraintBottom_toTopOf="@+id/inputCpfCnpj"
+        app:layout_constraintBottom_toTopOf="@+id/btnEntrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
@@ -39,37 +74,18 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/inputCpfCnpj"
-        android:layout_width="280dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="196dp"
-        android:background="@drawable/pred_input"
-        android:ems="10"
-        android:hint="CPF / CNPJ"
-        android:inputType="text"
-        android:paddingLeft="15dp"
-        android:textColor="@color/branco"
-        android:textColorHint="@color/branco"
-        app:layout_constraintBottom_toTopOf="@+id/btnEntrar"
+    <Switch
+        android:id="@+id/swtCnpj"
+        android:layout_width="97dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="12dp"
+        android:text="CNPJ"
+        android:textColor="@color/ciano"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/inputCpfCnpj"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.207"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="136dp"
-        android:fontFamily="@font/jockey_one"
-        android:shadowColor="@color/preto"
-        android:text="Administrador"
-        android:textColor="@color/ciano"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/inputEmailContato"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
