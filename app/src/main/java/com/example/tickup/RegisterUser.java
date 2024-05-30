@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -29,9 +31,12 @@ public class RegisterUser extends AppCompatActivity {
 
     private EditText inputNome, inputTelefone, inputIdade, inputCpf, inputEmail, inputSenha;
     private Button btnCadastrar;
+
+    private ImageButton showHidePasswordButton;
     private OkHttpClient client;
     private JSONObject jsonObject;
     private String url;
+    private boolean isPasswordVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,7 @@ public class RegisterUser extends AppCompatActivity {
         inputEmail = findViewById(R.id.inputEmail);
         inputSenha = findViewById(R.id.inputSenha);
         btnCadastrar = findViewById(R.id.btnCadastrar);
+        showHidePasswordButton = findViewById(R.id.showHidePasswordButton);
 
         inputCpf.addTextChangedListener(new TextWatcher() {
             private static final int MAX_LENGTH = 14;
@@ -126,6 +132,21 @@ public class RegisterUser extends AppCompatActivity {
         client = new OkHttpClient();
         jsonObject = new JSONObject();
         url = "https://tick-up-1fb4969b94c5.herokuapp.com/api/Usuario/Cadastrar";
+
+        showHidePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isPasswordVisible) {
+                    inputSenha.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    showHidePasswordButton.setImageResource(R.drawable.ic_visibility_off);
+                } else {
+                    inputSenha.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    showHidePasswordButton.setImageResource(R.drawable.ic_visibility);
+                }
+                inputSenha.setSelection(inputSenha.getText().length());
+                isPasswordVisible = !isPasswordVisible;
+            }
+        });
 
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
