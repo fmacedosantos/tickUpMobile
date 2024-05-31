@@ -65,7 +65,9 @@ public class VerifyTicket extends AppCompatActivity {
                     builder.setTitle("Resultado");
                     builder.setMessage(message);
                     builder.setPositiveButton("OK", (dialog, i) -> dialog.dismiss()).show();
-                    deleteTicket(ticketId);
+                    if (isValid) {
+                        deleteTicket(ticketId);
+                    }
                 }
             });
         }
@@ -112,16 +114,13 @@ public class VerifyTicket extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 runOnUiThread(() -> {
-                    if (response.isSuccessful()) {
-                        Toast.makeText(VerifyTicket.this, "Ingresso excluído com sucesso", Toast.LENGTH_LONG).show();
-                    } else {
+                    if (!response.isSuccessful()) {
                         Toast.makeText(VerifyTicket.this, "Falha ao excluir ingresso: " + response.message(), Toast.LENGTH_LONG).show();
                     }
                 });
             }
         });
     }
-
 
     interface VerificationCallback {
         void onResult(boolean isValid);
