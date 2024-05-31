@@ -44,7 +44,7 @@ public class MyTickets extends AppCompatActivity {
         ticketsTxtView = findViewById(R.id.loadingMessage);
         qrCodeContainer = findViewById(R.id.qrCodeContainer);
         email = getIntent().getStringExtra("emailUsuario");
-        url = "https://tick-up-1fb4969b94c5.herokuapp.com/api/Compra/Usuario/" + email;
+        url = "https://tick-up-1fb4969b94c5.herokuapp.com/api/Ingresso/Usuario/" + email;
         getTickets(email);
     }
 
