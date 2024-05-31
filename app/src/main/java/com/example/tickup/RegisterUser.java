@@ -186,66 +186,67 @@ public class RegisterUser extends AppCompatActivity {
                     return;
                 }
 
-                try {
-                    jsonObject.put("email", email);
-                    jsonObject.put("cpf", cpf);
-                    jsonObject.put("nome", name);
-                    jsonObject.put("telefone", phone);
-                    jsonObject.put("senha", password);
-                    jsonObject.put("idade", age);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
-                Request request = new Request.Builder()
-                        .url(url)
-                        .post(body)
-                        .build();
-
-                client.newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        e.printStackTrace();
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(RegisterUser.this, "Erro ao registrar usuário", Toast.LENGTH_SHORT).show();
+                verifyEmail(email, emailExist -> {
+                    if (emailExist) {
+                        runOnUiThread(() -> Toast.makeText(RegisterUser.this, "Email já cadastrado", Toast.LENGTH_SHORT).show());
+                    } else {
+                        verifyCpf(cpf, cpfExist -> {
+                            if (cpfExist) {
+                                runOnUiThread(() -> Toast.makeText(RegisterUser.this, "CPF já cadastrado", Toast.LENGTH_SHORT).show());
+                            } else {
+                                registerUser(name, phone, age, cpf, email, password);
                             }
                         });
                     }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        if (response.isSuccessful()) {
-                            String responseData = response.body().string();
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(RegisterUser.this, "Usuário registrado com sucesso", Toast.LENGTH_SHORT).show();
-
-                                    Intent intent = new Intent(RegisterUser.this, MyTickets.class);
-                                    intent.putExtra("emailUsuario", email);
-                                    startActivity(intent);
-
-                                    nameInput.setText("");
-                                    phoneInput.setText("");
-                                    ageInput.setText("");
-                                    cpfInput.setText("");
-                                    emailInput.setText("");
-                                    passwordInput.setText("");
-                                }
-                            });
-                        } else {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(RegisterUser.this, "Erro: " + response.message(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    }
                 });
+            }
+        });
+    }
+
+    private void registerUser(String name, String phone, int age, String cpf, String email, String password) {
+        try {
+            jsonObject.put("email", email);
+            jsonObject.put("cpf", cpf);
+            jsonObject.put("nome", name);
+            jsonObject.put("telefone", phone);
+            jsonObject.put("senha", password);
+            jsonObject.put("idade", age);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                runOnUiThread(() -> Toast.makeText(RegisterUser.this, "Erro ao registrar usuário", Toast.LENGTH_SHORT).show());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String responseData = response.body().string();
+                    runOnUiThread(() -> {
+                        Toast.makeText(RegisterUser.this, "Usuário registrado com sucesso", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(RegisterUser.this, MyTickets.class);
+                        intent.putExtra("emailUsuario", email);
+                        startActivity(intent);
+                        nameInput.setText("");
+                        phoneInput.setText("");
+                        ageInput.setText("");
+                        cpfInput.setText("");
+                        emailInput.setText("");
+                        passwordInput.setText("");
+                    });
+                } else {
+                    runOnUiThread(() -> Toast.makeText(RegisterUser.this, "Erro: " + response.message(), Toast.LENGTH_SHORT).show());
+                }
             }
         });
     }
@@ -262,5 +263,59 @@ public class RegisterUser extends AppCompatActivity {
     private boolean isTelefoneValid(String telefone) {
         String unformattedTelefone = telefone.replaceAll("[^\\d]", "");
         return unformattedTelefone.length() == 11;
+    }
+
+    private void verifyEmail(String email, VerificationCallback callback) {
+        String verifyEmailUrl = "https://tick-up-1fb4969b94c5.herokuapp.com/api/Usuario/Verificar/Email/" + email;
+
+        Request request = new Request.Builder()
+                .url(verifyEmailUrl)
+                .get()
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                runOnUiThread(() -> callback.onResult(false));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    runOnUiThread(() -> callback.onResult(true));
+                } else {
+                    runOnUiThread(() -> callback.onResult(false));
+                }
+            }
+        });
+    }
+
+    private void verifyCpf(String cpf, VerificationCallback callback) {
+        String verifyCpfUrl = "https://tick-up-1fb4969b94c5.herokuapp.com/api/Usuario/Verificar/Cpf/" + cpf;
+
+        Request request = new Request.Builder()
+                .url(verifyCpfUrl)
+                .get()
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                runOnUiThread(() -> callback.onResult(false));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    runOnUiThread(() -> callback.onResult(true));
+                } else {
+                    runOnUiThread(() -> callback.onResult(false));
+                }
+            }
+        });
+    }
+
+    interface VerificationCallback {
+        void onResult(boolean exist);
     }
 }
