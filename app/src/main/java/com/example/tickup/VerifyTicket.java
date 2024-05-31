@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
@@ -52,9 +53,9 @@ public class VerifyTicket extends AppCompatActivity {
 
     ActivityResultLauncher<ScanOptions> barLaucher = registerForActivityResult(new ScanContract(), result -> {
         if (result.getContents() != null) {
-            String idIngresso = result.getContents();
+            String ticketId = result.getContents();
 
-            verifyTicket(idIngresso, new VerificationCallback() {
+            verifyTicket(ticketId, new VerificationCallback() {
                 @Override
                 public void onResult(boolean isValid) {
                     String message = isValid ? "Ingresso válido" : "Ingresso inválido";
@@ -64,6 +65,7 @@ public class VerifyTicket extends AppCompatActivity {
                     builder.setTitle("Resultado");
                     builder.setMessage(message);
                     builder.setPositiveButton("OK", (dialog, i) -> dialog.dismiss()).show();
+                    deleteTicket(ticketId);
                 }
             });
         }
@@ -92,6 +94,34 @@ public class VerifyTicket extends AppCompatActivity {
             }
         });
     }
+
+    private void deleteTicket(String ticketId) {
+        url = "https://tick-up-1fb4969b94c5.herokuapp.com/api/Ingresso/Deletar/" + ticketId;
+
+        Request request = new Request.Builder()
+                .url(url)
+                .delete()
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                runOnUiThread(() -> Toast.makeText(VerifyTicket.this, "Falha ao excluir ingresso: " + e.getMessage(), Toast.LENGTH_LONG).show());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                runOnUiThread(() -> {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(VerifyTicket.this, "Ingresso excluído com sucesso", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(VerifyTicket.this, "Falha ao excluir ingresso: " + response.message(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+    }
+
 
     interface VerificationCallback {
         void onResult(boolean isValid);
