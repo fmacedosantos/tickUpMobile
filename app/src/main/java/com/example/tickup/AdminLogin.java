@@ -108,6 +108,9 @@ public class AdminLogin extends AppCompatActivity {
 
                                         Intent intent = new Intent(AdminLogin.this, VerifyTicket.class);
                                         startActivity(intent);
+
+                                        emailInput.setText("");
+                                        cpfCnpjInput.setText("");
                                     }
                                 });
                             }

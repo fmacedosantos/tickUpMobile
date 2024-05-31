@@ -227,6 +227,13 @@ public class RegisterUser extends AppCompatActivity {
                                     Intent intent = new Intent(RegisterUser.this, MyTickets.class);
                                     intent.putExtra("emailUsuario", email);
                                     startActivity(intent);
+
+                                    nameInput.setText("");
+                                    phoneInput.setText("");
+                                    ageInput.setText("");
+                                    cpfInput.setText("");
+                                    emailInput.setText("");
+                                    passwordInput.setText("");
                                 }
                             });
                         } else {

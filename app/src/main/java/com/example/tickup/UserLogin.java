@@ -92,6 +92,9 @@ public class UserLogin extends AppCompatActivity {
                                         Intent intent = new Intent(UserLogin.this, MyTickets.class);
                                         intent.putExtra("emailUsuario", email);
                                         startActivity(intent);
+
+                                        emailInput.setText("");
+                                        passwordInput.setText("");
                                     }
                                 });
                             }
