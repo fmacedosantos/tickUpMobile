@@ -95,6 +95,9 @@ public class UserLogin extends AppCompatActivity {
 
                                         emailInput.setText("");
                                         passwordInput.setText("");
+
+                                        passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                                        showHidePasswordButton.setImageResource(R.drawable.ic_visibility_off);
                                     }
                                 });
                             }
@@ -124,15 +127,12 @@ public class UserLogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isPasswordVisible) {
-                    // Hide password
                     passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     showHidePasswordButton.setImageResource(R.drawable.ic_visibility_off);
                 } else {
-                    // Show password
                     passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                     showHidePasswordButton.setImageResource(R.drawable.ic_visibility);
                 }
-                // Move cursor to end of input
                 passwordInput.setSelection(passwordInput.getText().length());
                 isPasswordVisible = !isPasswordVisible;
             }

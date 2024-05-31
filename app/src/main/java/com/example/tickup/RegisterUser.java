@@ -234,15 +234,20 @@ public class RegisterUser extends AppCompatActivity {
                     String responseData = response.body().string();
                     runOnUiThread(() -> {
                         Toast.makeText(RegisterUser.this, "Usuário registrado com sucesso", Toast.LENGTH_SHORT).show();
+
                         Intent intent = new Intent(RegisterUser.this, MyTickets.class);
                         intent.putExtra("emailUsuario", email);
                         startActivity(intent);
+
                         nameInput.setText("");
                         phoneInput.setText("");
                         ageInput.setText("");
                         cpfInput.setText("");
                         emailInput.setText("");
                         passwordInput.setText("");
+
+                        passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        showHidePasswordButton.setImageResource(R.drawable.ic_visibility_off);
                     });
                 } else {
                     runOnUiThread(() -> Toast.makeText(RegisterUser.this, "Erro: " + response.message(), Toast.LENGTH_SHORT).show());
