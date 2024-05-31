@@ -6,25 +6,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btnUsuario, btnAdmin;
-    private TextView txtCadastro;
+    private Button userBtn, adminBtn;
+    private TextView registerTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnUsuario = findViewById(R.id.btnUsuario);
-        btnAdmin = findViewById(R.id.btnAdministrador);
-        txtCadastro = findViewById(R.id.txtCadastro);
+        userBtn = findViewById(R.id.userBtn);
+        adminBtn = findViewById(R.id.adminBtn);
+        registerTxt = findViewById(R.id.registerTxt);
 
 
 
-        btnUsuario.setOnClickListener(new View.OnClickListener() {
+        userBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, UserLogin.class);
@@ -32,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnAdmin.setOnClickListener(new View.OnClickListener() {
+        adminBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AdminLogin.class);
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        txtCadastro.setOnClickListener(new View.OnClickListener() {
+        registerTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, RegisterUser.class);

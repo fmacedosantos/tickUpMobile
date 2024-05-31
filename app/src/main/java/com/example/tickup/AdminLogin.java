@@ -26,8 +26,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class AdminLogin extends AppCompatActivity {
-    private EditText inputEmailContato, inputCpfCnpj;
-    private Button btnEntrar;
+    private EditText emailInput, cpfCnpjInput;
+    private Button enterBtn;
     private OkHttpClient client;
     private JSONObject jsonObject;
     private String url;
@@ -39,10 +39,10 @@ public class AdminLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_login);
 
-        inputEmailContato = findViewById(R.id.inputEmailContato);
-        inputCpfCnpj = findViewById(R.id.inputCpfCnpj);
-        btnEntrar = findViewById(R.id.btnEntrar);
-        switchCpfCnpj = findViewById(R.id.swtCnpj);
+        emailInput = findViewById(R.id.emailContactInput);
+        cpfCnpjInput = findViewById(R.id.cpfCnpjInput);
+        enterBtn = findViewById(R.id.btnEntrar);
+        switchCpfCnpj = findViewById(R.id.cnpjSwt);
 
         client = new OkHttpClient();
         jsonObject = new JSONObject();
@@ -53,25 +53,25 @@ public class AdminLogin extends AppCompatActivity {
 
         switchCpfCnpj.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                inputCpfCnpj.setHint("CNPJ");
-                inputCpfCnpj.removeTextChangedListener(cpfTextWatcher);
-                inputCpfCnpj.addTextChangedListener(cnpjTextWatcher);
+                cpfCnpjInput.setHint("CNPJ");
+                cpfCnpjInput.removeTextChangedListener(cpfTextWatcher);
+                cpfCnpjInput.addTextChangedListener(cnpjTextWatcher);
             } else {
-                inputCpfCnpj.setHint("CPF");
-                inputCpfCnpj.removeTextChangedListener(cnpjTextWatcher);
-                inputCpfCnpj.addTextChangedListener(cpfTextWatcher);
+                cpfCnpjInput.setHint("CPF");
+                cpfCnpjInput.removeTextChangedListener(cnpjTextWatcher);
+                cpfCnpjInput.addTextChangedListener(cpfTextWatcher);
             }
-            inputCpfCnpj.setText("");
+            cpfCnpjInput.setText("");
         });
 
-        btnEntrar.setOnClickListener(new View.OnClickListener() {
+        enterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String emailContato = inputEmailContato.getText().toString();
-                String cpfCnpj = inputCpfCnpj.getText().toString();
+                String email = emailInput.getText().toString();
+                String cpfCnpj = cpfCnpjInput.getText().toString();
 
                 try {
-                    jsonObject.put("emailContato", emailContato);
+                    jsonObject.put("emailContato", email);
                     jsonObject.put("cpfCnpj", cpfCnpj);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -131,9 +131,8 @@ public class AdminLogin extends AppCompatActivity {
             }
         });
 
-        // Set the initial state of the switch
-        switchCpfCnpj.setChecked(false); // default to CPF
-        inputCpfCnpj.addTextChangedListener(cpfTextWatcher);
+        switchCpfCnpj.setChecked(false);
+        cpfCnpjInput.addTextChangedListener(cpfTextWatcher);
     }
 
     private TextWatcher createTextWatcher(final String maskPattern) {
@@ -167,8 +166,8 @@ public class AdminLogin extends AppCompatActivity {
                         i++;
                     }
                     oldString = mask.toString();
-                    inputCpfCnpj.setText(mask.toString());
-                    inputCpfCnpj.setSelection(mask.length());
+                    cpfCnpjInput.setText(mask.toString());
+                    cpfCnpjInput.setSelection(mask.length());
                     isUpdating = false;
                 }
             }

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cinza"
+    android:background="@color/gray"
     tools:context=".UserLogin">
 
     <TextView
@@ -12,11 +12,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="136dp"
         android:fontFamily="@font/jockey_one"
-        android:shadowColor="@color/preto"
+        android:shadowColor="@color/black"
         android:text="Usuário"
-        android:textColor="@color/ciano"
+        android:textColor="@color/cyan"
         android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/inputEmailUsuario"
+        app:layout_constraintBottom_toTopOf="@+id/userEmailInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,17 +24,17 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/inputEmailUsuario"
+        android:id="@+id/userEmailInput"
         android:layout_width="280dp"
         android:layout_height="50dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/pred_input"
+        android:background="@drawable/input_preset"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:paddingLeft="15dp"
-        android:textColor="@color/branco"
-        android:textColorHint="@color/branco"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/frameLayoutSenha"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -45,23 +45,23 @@
         android:layout_width="280dp"
         android:layout_height="50dp"
         android:layout_marginBottom="196dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnEntrarUsuario"
+        app:layout_constraintBottom_toTopOf="@+id/userEnterBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
-            android:id="@+id/inputSenhaUsuario"
+            android:id="@+id/userPasswordInput"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/pred_input"
+            android:background="@drawable/input_preset"
             android:ems="10"
             android:hint="Senha"
             android:inputType="text|textPassword"
             android:paddingLeft="15dp"
             android:paddingRight="60dp"
-            android:textColor="@color/branco"
-            android:textColorHint="@color/branco" />
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
 
         <ImageButton
             android:id="@+id/showHidePasswordButton"
@@ -74,13 +74,13 @@
     </FrameLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnEntrarUsuario"
+        android:id="@+id/userEnterBtn"
         android:layout_width="140dp"
         android:layout_height="50dp"
         android:layout_marginBottom="92dp"
-        android:background="@drawable/pred_botao_tipo1"
+        android:background="@drawable/button1_preset"
         android:text="Entrar"
-        android:textColor="@color/cinza"
+        android:textColor="@color/gray"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

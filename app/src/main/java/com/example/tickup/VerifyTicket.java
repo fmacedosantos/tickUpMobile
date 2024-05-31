@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.journeyapps.barcodescanner.CaptureActivity;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
@@ -21,7 +20,7 @@ import okhttp3.Response;
 import java.io.IOException;
 
 public class VerifyTicket extends AppCompatActivity {
-    private Button btnScan;
+    private Button scanBtn;
     private String url;
     private OkHttpClient client;
 
@@ -32,9 +31,9 @@ public class VerifyTicket extends AppCompatActivity {
 
         client = new OkHttpClient();
 
-        btnScan = findViewById(R.id.btnScan);
+        scanBtn = findViewById(R.id.scanBtn);
 
-        btnScan.setOnClickListener(new View.OnClickListener() {
+        scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 scanCode();
@@ -55,7 +54,7 @@ public class VerifyTicket extends AppCompatActivity {
         if (result.getContents() != null) {
             String idIngresso = result.getContents();
 
-            verificarIngresso(idIngresso, new VerificationCallback() {
+            verifyTicket(idIngresso, new VerificationCallback() {
                 @Override
                 public void onResult(boolean isValid) {
                     String message = isValid ? "Ingresso válido" : "Ingresso inválido";
@@ -70,8 +69,8 @@ public class VerifyTicket extends AppCompatActivity {
         }
     });
 
-    private void verificarIngresso(String idIngresso, VerificationCallback callback) {
-        url = "https://tick-up-1fb4969b94c5.herokuapp.com/api/Ingresso/Verificar/" + idIngresso;
+    private void verifyTicket(String ticketId, VerificationCallback callback) {
+        url = "https://tick-up-1fb4969b94c5.herokuapp.com/api/Ingresso/Verificar/" + ticketId;
 
         Request request = new Request.Builder()
                 .url(url)

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="branco">#FFFAFB</color>
-    <color name="preto">#131515</color>
-    <color name="cinza">#2B2C28</color>
-    <color name="ciano">#7DE2D1</color>
+    <color name="white">#FFFAFB</color>
+    <color name="black">#131515</color>
+    <color name="gray">#2B2C28</color>
+    <color name="cyan">#7DE2D1</color>
 </resources>

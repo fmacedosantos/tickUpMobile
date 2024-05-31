@@ -25,8 +25,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class UserLogin extends AppCompatActivity {
-    private EditText inputEmail, inputSenha;
-    private Button btnEntrar;
+    private EditText emailInput, passwordInput;
+    private Button enterBtn;
     private ImageButton showHidePasswordButton;
     private OkHttpClient client;
     private JSONObject jsonObject;
@@ -38,24 +38,24 @@ public class UserLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_login);
 
-        inputEmail = findViewById(R.id.inputEmailUsuario);
-        inputSenha = findViewById(R.id.inputSenhaUsuario);
-        btnEntrar = findViewById(R.id.btnEntrarUsuario);
+        emailInput = findViewById(R.id.userEmailInput);
+        passwordInput = findViewById(R.id.userPasswordInput);
+        enterBtn = findViewById(R.id.userEnterBtn);
         showHidePasswordButton = findViewById(R.id.showHidePasswordButton);
 
         client = new OkHttpClient();
         jsonObject = new JSONObject();
         url = "https://tick-up-1fb4969b94c5.herokuapp.com/api/Usuario/Login";
 
-        btnEntrar.setOnClickListener(new View.OnClickListener() {
+        enterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = inputEmail.getText().toString();
-                String senha = inputSenha.getText().toString();
+                String email = emailInput.getText().toString();
+                String password = passwordInput.getText().toString();
 
                 try {
                     jsonObject.put("email", email);
-                    jsonObject.put("senha", senha);
+                    jsonObject.put("senha", password);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -122,15 +122,15 @@ public class UserLogin extends AppCompatActivity {
             public void onClick(View v) {
                 if (isPasswordVisible) {
                     // Hide password
-                    inputSenha.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     showHidePasswordButton.setImageResource(R.drawable.ic_visibility_off);
                 } else {
                     // Show password
-                    inputSenha.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                     showHidePasswordButton.setImageResource(R.drawable.ic_visibility);
                 }
                 // Move cursor to end of input
-                inputSenha.setSelection(inputSenha.getText().length());
+                passwordInput.setSelection(passwordInput.getText().length());
                 isPasswordVisible = !isPasswordVisible;
             }
         });

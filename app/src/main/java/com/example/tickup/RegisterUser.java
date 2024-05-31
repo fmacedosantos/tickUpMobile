@@ -29,8 +29,8 @@ import okhttp3.Response;
 
 public class RegisterUser extends AppCompatActivity {
 
-    private EditText inputNome, inputTelefone, inputIdade, inputCpf, inputEmail, inputSenha;
-    private Button btnCadastrar;
+    private EditText nameInput, phoneInput, ageInput, cpfInput, emailInput, passwordInput;
+    private Button registerBtn;
 
     private ImageButton showHidePasswordButton;
     private OkHttpClient client;
@@ -43,16 +43,16 @@ public class RegisterUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
 
-        inputNome = findViewById(R.id.inputNome);
-        inputTelefone = findViewById(R.id.inputTelefone);
-        inputIdade = findViewById(R.id.inputIdade);
-        inputCpf = findViewById(R.id.inputCpf);
-        inputEmail = findViewById(R.id.inputEmail);
-        inputSenha = findViewById(R.id.inputSenha);
-        btnCadastrar = findViewById(R.id.btnCadastrar);
+        nameInput = findViewById(R.id.nameInput);
+        phoneInput = findViewById(R.id.phoneInput);
+        ageInput = findViewById(R.id.ageInput);
+        cpfInput = findViewById(R.id.cpfInput);
+        emailInput = findViewById(R.id.emailInput);
+        passwordInput = findViewById(R.id.passwordInput);
+        registerBtn = findViewById(R.id.registerBtn);
         showHidePasswordButton = findViewById(R.id.showHidePasswordButton);
 
-        inputCpf.addTextChangedListener(new TextWatcher() {
+        cpfInput.addTextChangedListener(new TextWatcher() {
             private static final int MAX_LENGTH = 14;
             private boolean isUpdating;
             private String oldString = "";
@@ -85,14 +85,14 @@ public class RegisterUser extends AppCompatActivity {
                         i++;
                     }
                     oldString = mask.toString();
-                    inputCpf.setText(mask.toString());
-                    inputCpf.setSelection(mask.length());
+                    cpfInput.setText(mask.toString());
+                    cpfInput.setSelection(mask.length());
                     isUpdating = false;
                 }
             }
         });
 
-        inputTelefone.addTextChangedListener(new TextWatcher() {
+        phoneInput.addTextChangedListener(new TextWatcher() {
             private boolean isUpdating;
             private String oldString = "";
 
@@ -122,8 +122,8 @@ public class RegisterUser extends AppCompatActivity {
                         i++;
                     }
                     oldString = mask.toString();
-                    inputTelefone.setText(mask.toString());
-                    inputTelefone.setSelection(mask.length());
+                    phoneInput.setText(mask.toString());
+                    phoneInput.setSelection(mask.length());
                     isUpdating = false;
                 }
             }
@@ -137,28 +137,28 @@ public class RegisterUser extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isPasswordVisible) {
-                    inputSenha.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     showHidePasswordButton.setImageResource(R.drawable.ic_visibility_off);
                 } else {
-                    inputSenha.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                     showHidePasswordButton.setImageResource(R.drawable.ic_visibility);
                 }
-                inputSenha.setSelection(inputSenha.getText().length());
+                passwordInput.setSelection(passwordInput.getText().length());
                 isPasswordVisible = !isPasswordVisible;
             }
         });
 
-        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+        registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nome = inputNome.getText().toString();
-                String telefone = inputTelefone.getText().toString();
-                String idadeStr = inputIdade.getText().toString();
-                String cpf = inputCpf.getText().toString();
-                String email = inputEmail.getText().toString();
-                String senha = inputSenha.getText().toString();
+                String name = nameInput.getText().toString();
+                String phone = phoneInput.getText().toString();
+                String ageStr = ageInput.getText().toString();
+                String cpf = cpfInput.getText().toString();
+                String email = emailInput.getText().toString();
+                String password = passwordInput.getText().toString();
 
-                if (nome.isEmpty() || telefone.isEmpty() || idadeStr.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+                if (name.isEmpty() || phone.isEmpty() || ageStr.isEmpty() || cpf.isEmpty() || email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(RegisterUser.this, "Todos os campos devem ser preenchidos", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -173,14 +173,14 @@ public class RegisterUser extends AppCompatActivity {
                     return;
                 }
 
-                if (!isTelefoneValid(telefone)) {
+                if (!isTelefoneValid(phone)) {
                     Toast.makeText(RegisterUser.this, "Telefone inválido", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                int idade;
+                int age;
                 try {
-                    idade = Integer.parseInt(idadeStr);
+                    age = Integer.parseInt(ageStr);
                 } catch (NumberFormatException e) {
                     Toast.makeText(RegisterUser.this, "Idade inválida", Toast.LENGTH_SHORT).show();
                     return;
@@ -189,10 +189,10 @@ public class RegisterUser extends AppCompatActivity {
                 try {
                     jsonObject.put("email", email);
                     jsonObject.put("cpf", cpf);
-                    jsonObject.put("nome", nome);
-                    jsonObject.put("telefone", telefone);
-                    jsonObject.put("senha", senha);
-                    jsonObject.put("idade", idade);
+                    jsonObject.put("nome", name);
+                    jsonObject.put("telefone", phone);
+                    jsonObject.put("senha", password);
+                    jsonObject.put("idade", age);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

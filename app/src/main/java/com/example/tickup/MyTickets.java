@@ -31,7 +31,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class MyTickets extends AppCompatActivity {
-    private TextView txtViewIngressos;
+    private TextView ticketsTxtView;
     private LinearLayout qrCodeContainer;
     private String email, url;
     private OkHttpClient client;
@@ -41,14 +41,14 @@ public class MyTickets extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_tickets);
 
-        txtViewIngressos = findViewById(R.id.teste);
+        ticketsTxtView = findViewById(R.id.loadingMessage);
         qrCodeContainer = findViewById(R.id.qrCodeContainer);
         email = getIntent().getStringExtra("emailUsuario");
         url = "https://tick-up-1fb4969b94c5.herokuapp.com/api/Compra/Usuario/" + email;
-        obterIngressos(email);
+        getTickets(email);
     }
 
-    private void obterIngressos(String email) {
+    private void getTickets(String email) {
         client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(url)
@@ -61,7 +61,7 @@ public class MyTickets extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        txtViewIngressos.setText("Requisição falhou: " + e.getMessage());
+                        ticketsTxtView.setText("Requisição falhou: " + e.getMessage());
                     }
                 });
             }
@@ -72,20 +72,20 @@ public class MyTickets extends AppCompatActivity {
                     final String json = response.body().string();
 
                     Gson gson = new Gson();
-                    Type listType = new TypeToken<List<Ingresso>>() {}.getType();
-                    List<Ingresso> ingressos = gson.fromJson(json, listType);
+                    Type listType = new TypeToken<List<Ticket>>() {}.getType();
+                    List<Ticket> tickets = gson.fromJson(json, listType);
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if (ingressos != null && !ingressos.isEmpty()) {
+                            if (tickets != null && !tickets.isEmpty()) {
                                 qrCodeContainer.removeAllViews();
-                                for (Ingresso ingresso : ingressos) {
-                                    adicionarIngressosView(ingresso);
+                                for (Ticket ticket : tickets) {
+                                    addTicket(ticket);
                                 }
-                                txtViewIngressos.setText("");
+                                ticketsTxtView.setText("");
                             } else {
-                                txtViewIngressos.setText("O usuário cadastrado não possui ingressos.");
+                                ticketsTxtView.setText("O usuário cadastrado não possui ingressos.");
                             }
                         }
                     });
@@ -93,7 +93,7 @@ public class MyTickets extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            txtViewIngressos.setText("Falha em encontrar os ingressos: " + response.code());
+                            ticketsTxtView.setText("Falha em encontrar os ingressos: " + response.code());
                         }
                     });
                 }
@@ -101,17 +101,17 @@ public class MyTickets extends AppCompatActivity {
         });
     }
 
-    private void adicionarIngressosView(Ingresso ingresso) {
+    private void addTicket(Ticket ingresso) {
         TextView title = new TextView(this);
-        title.setText("Evento: " + ingresso.getNomeEvento());
+        title.setText("Evento: " + ingresso.getEventName());
 
-        title.setTextColor(getResources().getColor(R.color.cinza));
+        title.setTextColor(getResources().getColor(R.color.gray));
         title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         Typeface typeface = ResourcesCompat.getFont(this, R.font.jockey_one);
         title.setTypeface(typeface);
 
         ImageView qrCodeView = new ImageView(this);
-        Bitmap qrCodeBitmap = gerarQRCode(ingresso.getIdIngresso());
+        Bitmap qrCodeBitmap = gerarQRCode(ingresso.getTicketId());
         if (qrCodeBitmap != null) {
             qrCodeView.setImageBitmap(qrCodeBitmap);
         }

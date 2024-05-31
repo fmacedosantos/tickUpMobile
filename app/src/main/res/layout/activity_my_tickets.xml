@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/branco"
+    android:background="@color/white"
     tools:context=".MyTickets">
 
     <LinearLayout
@@ -15,22 +15,22 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/cinza"
+            android:background="@color/gray"
             android:paddingLeft="10dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="Meus Ingressos"
-            android:textColor="@color/ciano"
+            android:textColor="@color/cyan"
             android:textSize="24sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Carregando ingressos..."
-            android:textColor="@color/cinza"
+            android:textColor="@color/gray"
             android:paddingLeft="20dp"
             android:paddingTop="15dp"
-            android:id="@+id/teste"/>
+            android:id="@+id/loadingMessage"/>
 
         <LinearLayout
             android:id="@+id/qrCodeContainer"

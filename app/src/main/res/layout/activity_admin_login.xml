@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cinza"
+    android:background="@color/gray"
     tools:context=".AdminLogin">
 
     <TextView
@@ -13,11 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="136dp"
         android:fontFamily="@font/jockey_one"
-        android:shadowColor="@color/preto"
+        android:shadowColor="@color/black"
         android:text="Administrador"
-        android:textColor="@color/ciano"
+        android:textColor="@color/cyan"
         android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/inputEmailContato"
+        app:layout_constraintBottom_toTopOf="@+id/emailContactInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,35 +26,35 @@
 
 
     <EditText
-        android:id="@+id/inputEmailContato"
+        android:id="@+id/emailContactInput"
 
         android:layout_width="280dp"
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/pred_input"
+        android:background="@drawable/input_preset"
         android:ems="10"
         android:hint="Email de contato"
         android:inputType="textEmailAddress"
         android:paddingLeft="15dp"
-        android:textColor="@color/branco"
-        android:textColorHint="@color/branco"
-        app:layout_constraintBottom_toTopOf="@+id/swtCnpj"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/cnpjSwt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/inputCpfCnpj"
+        android:id="@+id/cpfCnpjInput"
         android:layout_width="280dp"
         android:layout_height="50dp"
         android:layout_marginBottom="168dp"
-        android:background="@drawable/pred_input"
+        android:background="@drawable/input_preset"
         android:ems="10"
         android:hint="CPF"
         android:inputType="text"
         android:paddingLeft="15dp"
-        android:textColor="@color/branco"
-        android:textColorHint="@color/branco"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/btnEntrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -65,9 +65,9 @@
         android:layout_width="140dp"
         android:layout_height="50dp"
         android:layout_marginBottom="92dp"
-        android:background="@drawable/pred_botao_tipo1"
+        android:background="@drawable/button1_preset"
         android:text="Entrar"
-        android:textColor="@color/cinza"
+        android:textColor="@color/gray"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,14 +75,14 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Switch
-        android:id="@+id/swtCnpj"
+        android:id="@+id/cnpjSwt"
         android:layout_width="97dp"
         android:layout_height="39dp"
         android:layout_marginBottom="12dp"
         android:text="CNPJ"
-        android:textColor="@color/ciano"
+        android:textColor="@color/cyan"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/inputCpfCnpj"
+        app:layout_constraintBottom_toTopOf="@+id/cpfCnpjInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.207"
         app:layout_constraintStart_toStartOf="parent" />

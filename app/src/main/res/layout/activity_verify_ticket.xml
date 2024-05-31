@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cinza"
+    android:background="@color/gray"
     tools:context=".VerifyTicket">
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnScan"
+        android:id="@+id/scanBtn"
         android:layout_width="218dp"
         android:layout_height="45dp"
-        android:background="@drawable/pred_botao_tipo2"
+        android:background="@drawable/button2_preset"
         android:text="Escanear"
-        android:textColor="@color/branco"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cinza"
+    android:background="@color/gray"
     app:circularflow_defaultRadius="30px"
     tools:context=".MainActivity">
 
@@ -14,7 +14,7 @@
         android:layout_marginTop="92dp"
         android:fontFamily="@font/jockey_one"
         android:text="TickUP"
-        android:textColor="@color/ciano"
+        android:textColor="@color/cyan"
         android:textSize="60sp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,37 +32,37 @@
         android:text="Entrar como"
         android:textColor="#FFFAFB"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnUsuario"
+        app:layout_constraintBottom_toTopOf="@+id/userBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.129"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnUsuario"
+        android:id="@+id/userBtn"
         android:layout_width="169dp"
         android:layout_height="53dp"
         android:layout_marginBottom="84dp"
-        android:background="@drawable/pred_botao_tipo1"
+        android:background="@drawable/button1_preset"
         android:text="Usuário"
-        android:textColor="@color/cinza"
-        app:layout_constraintBottom_toTopOf="@+id/txtCadastro"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toTopOf="@+id/registerTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnAdministrador"
+        android:id="@+id/adminBtn"
         android:layout_width="169dp"
         android:layout_height="53dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/pred_botao_tipo2"
+        android:background="@drawable/button2_preset"
         android:text="Administrador"
-        android:textColor="@color/branco"
-        app:layout_constraintBottom_toTopOf="@+id/txtCadastro"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/registerTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/txtCadastro"
+        android:id="@+id/registerTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="124dp"
@@ -83,6 +83,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.064"
-        app:srcCompat="@drawable/icone_tick_up" />
+        app:srcCompat="@drawable/icon_tick_up" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
